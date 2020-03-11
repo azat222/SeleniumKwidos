@@ -18,7 +18,7 @@ public class HomePageTest extends BaseTest {
     @Test
     public void titleTest () {
 
-        driver.get("https://testkwidos.tk/");
+        driver.get("https://kwidos.com/");
 
         String title = driver.getTitle();
         Assert.assertEquals(title, "Kwidos");
@@ -31,7 +31,7 @@ public class HomePageTest extends BaseTest {
     @Test
     public void ServiceProviderRegistrationTest () throws InterruptedException {
 
-        driver.get("https://testkwidos.tk/auth/register/contractor");
+        driver.get("https://kwidos.com/auth/register/contractor");
 
 
         Thread.sleep(4000);

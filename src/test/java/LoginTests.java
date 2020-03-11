@@ -4,6 +4,19 @@ import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
 
+    @Test
+    public void LoginSuccessTest () throws InterruptedException {
+
+        openLoginPage();
+        enterEmail("azat@testpro.io");
+        enterPassword("Password1!");
+        clickSubmit();
+
+        String actualText = getSuccessText(".alert.alert-danger");
+        Assert.assertEquals(actualText, "Success");
+
+    }
+
 
     @Test
     public void LoginWrongCredentialsTest () throws InterruptedException {
@@ -43,6 +56,11 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(actualText, "Password is required");
     }
 
+    private String getSuccessText(String s) {
+        String st = "Success";
+        return st;
+    }
+
     public String getErrorText (String cssSelector) throws InterruptedException {
         Thread.sleep(2000);
         String actualText = driver.findElement(By.cssSelector(cssSelector)).getText();
@@ -50,7 +68,7 @@ public class LoginTests extends BaseTest {
     }
 
     public void openLoginPage() {
-        driver.get("https://testkwidos.tk/auth/signin");
+        driver.get("https://kwidos.com/auth/login");
     }
 
     public void enterEmail(String email) throws InterruptedException {

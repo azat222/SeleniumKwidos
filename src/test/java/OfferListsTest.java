@@ -15,7 +15,7 @@ public class OfferListsTest extends BaseTest {
     //
     @Test
     public void OfferListSizeTest () throws InterruptedException {
-        driver.get("https://testkwidos.tk/offer/search");
+        driver.get("https://kwidos.com/offer/search");
         Thread.sleep(2000);
 
         List<WebElement> cardLists =  driver.findElements(By.cssSelector("[class*='card-shape']"));
@@ -25,7 +25,7 @@ public class OfferListsTest extends BaseTest {
 
     @Test
     public void FilterByServiceTypeTest () throws InterruptedException {
-        driver.get("https://testkwidos.tk/offer/search");
+        driver.get("https://kwidos.com/offer/search");
         Thread.sleep(2000);
 
         driver.findElement(By.xpath("//label[contains(text(), 'Service Type')]/../p-multiselect")).click();
