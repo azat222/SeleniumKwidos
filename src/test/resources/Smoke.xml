@@ -1,9 +1,10 @@
 <suite name="testSmoke">
     <test name="testSmoke" preserve-order="false">
+        <parameter name="URL" value="https://kwidos.com/auth/register/contractor"/>
         <classes>
-            <class name="LoginTests">
+            <class name="ServiceProviderSignUp">
                 <methods>
-                    <include name="LoginSuccessTest"/>
+                    <include name="ServiceProviderRegistrationTest"/>
                 </methods>
             </class>
         </classes>
