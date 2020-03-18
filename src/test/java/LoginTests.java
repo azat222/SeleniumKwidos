@@ -1,4 +1,7 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -61,28 +64,61 @@ public class LoginTests extends BaseTest {
         return st;
     }
 
-    public String getErrorText (String cssSelector) throws InterruptedException {
-        Thread.sleep(2000);
-        String actualText = driver.findElement(By.cssSelector(cssSelector)).getText();
+    public String getErrorText (String cssSelector) {
+
+        String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector))).getText();
+
         return actualText;
     }
 
+    @Test
+    public void сookiesExample() throws InterruptedException {
+//        driver.get("https://kwidos.tk/auth/login");
+        openLoginPage();
+        enterEmail("azat+3@testpro.io");
+        enterPassword("Qwerty2@");
+        clickSubmit();
+
+        driver.findElement(By.xpath("//*[contains(text(), 'GO TO PROFILE')]"));
+
+        Thread.sleep(3000);
+
+        driver.manage().deleteAllCookies();
+
+        Thread.sleep(3000);
+        driver.get("https://kwidos.tk");
+
+        //azat+3@testpro.io
+        //Qwerty2@
+
+//
+//        driver.manage().deleteAllCookies();
+//        driver.get("https://kwidos.tk");
+    }
+
     public void openLoginPage() {
-        driver.get("https://kwidos.com/auth/login");
+        driver.get("https://kwidos.tk/auth/login");
     }
 
-    public void enterEmail(String email) throws InterruptedException {
-        Thread.sleep(4000);
-        driver.findElement(By.cssSelector("#email")).sendKeys(email);
+    public void enterEmail(String email) {
+        findElement("#email").sendKeys(email);
     }
 
-    public void enterPassword(String password) throws InterruptedException {
-        Thread.sleep(2000);
-        driver.findElement(By.cssSelector("#password")).sendKeys(password);
+    public void enterPassword(String password) {
+        findElement("#password").sendKeys(password);
     }
 
     private void clickSubmit() {
-        driver.findElement(By.cssSelector("[type='submit']")).click();
+        clickToElement("[type='submit']");
     }
+
+    public WebElement findElement(String cssSelector) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
+    }
+
+    public void clickToElement(String cssSelector) {
+         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector))).click();
+    }
+
 
 }
