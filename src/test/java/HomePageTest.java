@@ -1,3 +1,4 @@
+import Pages.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +16,11 @@ public class HomePageTest extends BaseTest {
     @Test
     public void titleTest () {
 
-        driver.get("https://kwidos.com/");
+        HomePage homePage = new HomePage(driver);
 
-        String title = driver.getTitle();
+        homePage.openPage();
+        String title = homePage.getTitle();
+
         Assert.assertEquals(title, "Kwidos");
 
 

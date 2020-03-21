@@ -1,3 +1,5 @@
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,12 +12,16 @@ public class LoginTests extends BaseTest {
     @Test
     public void LoginSuccessTest () throws InterruptedException {
 
-        openLoginPage();
-        enterEmail("azat@testpro.io");
-        enterPassword("Password1!");
-        clickSubmit();
 
-        String actualText = getSuccessText(".alert.alert-danger");
+        homepage.openPage();
+        homepage.clickToOpenSignIn();
+        loginPage.openPage();
+
+        loginPage.enterEmail("azat@testpro.io");
+        loginPage.enterPassword("Password1!");
+        loginPage.clickSubmit();
+
+        String actualText = loginPage.getSuccessText(".alert.alert-danger");
         Assert.assertEquals(actualText, "Success");
 
     }
@@ -24,12 +30,13 @@ public class LoginTests extends BaseTest {
     @Test
     public void LoginWrongCredentialsTest () throws InterruptedException {
 
-        openLoginPage();
-        enterEmail("wrong@email.com");
-        enterPassword("Password");
-        clickSubmit();
 
-        String actualText = getErrorText(".alert.alert-danger");
+        loginPage.openPage()
+                .enterEmail("wrong@email.com")
+                .enterPassword("Password")
+                .clickSubmit();
+
+        String actualText = loginPage.getErrorText(".alert.alert-danger");
         Assert.assertEquals(actualText, "Username or password is incorrect");
 
     }
@@ -38,55 +45,52 @@ public class LoginTests extends BaseTest {
     @Test
     public void LoginEmptyEmailTest () throws InterruptedException {
 
-        openLoginPage();
-        enterEmail("");
-        enterPassword("Password");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(driver);
 
-        String actualText = getErrorText("[class='form-group has-error'] div");
+        loginPage.openPage();
+        loginPage.enterEmail("");
+        loginPage.enterPassword("Password");
+        loginPage.clickSubmit();
+
+        String actualText = loginPage.getErrorText("[class='form-group has-error'] div");
         Assert.assertEquals(actualText, "Email is required");
 
     }
 
     @Test
     public void LoginEmptyPasswordTest () throws InterruptedException {
-        openLoginPage();
-        enterEmail("wrong@email.com");
-        enterPassword("");
-        clickSubmit();
 
-        String actualText = getErrorText("[class='form-group has-error'] div");
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.openPage();
+        loginPage.enterEmail("wrong@email.com");
+        loginPage.enterPassword("");
+        loginPage.clickSubmit();
+
+        String actualText = loginPage.getErrorText("[class='form-group has-error'] div");
         Assert.assertEquals(actualText, "Password is required");
     }
 
-    private String getSuccessText(String s) {
-        String st = "Success";
-        return st;
-    }
+    // Implementation methods
 
-    public String getErrorText (String cssSelector) {
 
-        String actualText = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector))).getText();
 
-        return actualText;
-    }
-
-    @Test
-    public void сookiesExample() throws InterruptedException {
-//        driver.get("https://kwidos.tk/auth/login");
-        openLoginPage();
-        enterEmail("azat+3@testpro.io");
-        enterPassword("Qwerty2@");
-        clickSubmit();
-
-        driver.findElement(By.xpath("//*[contains(text(), 'GO TO PROFILE')]"));
-
-        Thread.sleep(3000);
-
-        driver.manage().deleteAllCookies();
-
-        Thread.sleep(3000);
-        driver.get("https://kwidos.tk");
+//    @Test
+//    public void сookiesExample() throws InterruptedException {
+////        driver.get("https://kwidos.tk/auth/login");
+//        openLoginPage();
+//        enterEmail("azat+3@testpro.io");
+//        enterPassword("Qwerty2@");
+//        clickSubmit();
+//
+//        driver.findElement(By.xpath("//*[contains(text(), 'GO TO PROFILE')]"));
+//
+//        Thread.sleep(3000);
+//
+//        driver.manage().deleteAllCookies();
+//
+//        Thread.sleep(3000);
+//        driver.get("https://kwidos.tk");
 
         //azat+3@testpro.io
         //Qwerty2@
@@ -94,31 +98,9 @@ public class LoginTests extends BaseTest {
 //
 //        driver.manage().deleteAllCookies();
 //        driver.get("https://kwidos.tk");
-    }
+//    }
 
-    public void openLoginPage() {
-        driver.get("https://kwidos.tk/auth/login");
-    }
 
-    public void enterEmail(String email) {
-        findElement("#email").sendKeys(email);
-    }
-
-    public void enterPassword(String password) {
-        findElement("#password").sendKeys(password);
-    }
-
-    private void clickSubmit() {
-        clickToElement("[type='submit']");
-    }
-
-    public WebElement findElement(String cssSelector) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
-    }
-
-    public void clickToElement(String cssSelector) {
-         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssSelector))).click();
-    }
 
 
 }

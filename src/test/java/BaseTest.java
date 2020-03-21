@@ -1,3 +1,5 @@
+import Pages.HomePage;
+import Pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,6 +15,8 @@ public class BaseTest {
 
     WebDriver driver;
     WebDriverWait wait;
+    HomePage homepage;
+    LoginPage loginPage;
 
     @BeforeMethod
     public void setUp(){
@@ -26,6 +30,10 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 4);
+
+        homepage = new HomePage(driver);
+        loginPage = new LoginPage(driver);
+
 
     }
 
