@@ -13,12 +13,14 @@ public class HomePage extends BasePage {
         super(givendriver);
     }
 
-    public void openPage() {
+    public HomePage openPage() {
         driver.get("https://kwidos.tk/");
+        return new HomePage(driver);
     }
 
-    public void clickToOpenSignIn() {
+    public LoginPage clickToOpenSignIn() {
         clickToElementByXpath("//*[contains(text(), 'SIGN IN')]");
+        return new LoginPage(driver);
     }
 
     //

@@ -86,7 +86,7 @@ public class AdvancedTests extends BaseTest {
     }
 
     @Test
-    public void сookiesExample() {
+    public void cookiesExample() {
         driver.get("https://kwidos.tk/auth/login");
 
         //azat+3@testpro.io
