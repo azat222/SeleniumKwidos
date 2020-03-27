@@ -12,18 +12,14 @@ public class LoginTests extends BaseTest {
     @Test
     public void LoginSuccessTest () throws InterruptedException {
 
-
         homepage.openPage();
-        homepage.clickToOpenSignIn();
-        loginPage.openPage();
+        loginPage = homepage
+                .clickToOpenSignIn()
+                .openPage()
+                .login("azat@testpro.io", "Password1!");
 
-        loginPage.enterEmail("azat@testpro.io");
-        loginPage.enterPassword("Password1!");
-        loginPage.clickSubmit();
-
-        String actualText = loginPage.getSuccessText(".alert.alert-danger");
-        Assert.assertEquals(actualText, "Success");
-
+        String actualText = loginPage.getSuccessText();
+        Assert.assertEquals(actualText, "Username or password is incorrect");
     }
 
 
@@ -76,7 +72,7 @@ public class LoginTests extends BaseTest {
 
 
 //    @Test
-//    public void сookiesExample() throws InterruptedException {
+//    public void cookiesExample() throws InterruptedException {
 ////        driver.get("https://kwidos.tk/auth/login");
 //        openLoginPage();
 //        enterEmail("azat+3@testpro.io");
