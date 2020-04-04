@@ -1,7 +1,7 @@
-<suite name="testSmoke">
-    <test name="testSmoke" preserve-order="false">
+<suite name="testRegression">
+    <test name="testRegression" preserve-order="false">
         <classes>
-            <class name="OfferListsTest"/>
+            <class name="CucumberRunner"/>
         </classes>
     </test>
 </suite>

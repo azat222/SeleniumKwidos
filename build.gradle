@@ -2,7 +2,9 @@ plugins {
     id 'java'
 }
 
-group 'test2'
+apply plugin:'java'
+
+
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -18,11 +20,17 @@ dependencies {
     // https://mvnrepository.com/artifact/org.testng/testng
     testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
 
+    testCompile 'io.cucumber:gherkin:5.1.0'
+    testCompile 'io.cucumber:cucumber-core:3.0.2'
+    testCompile 'io.cucumber:cucumber-java:3.0.2'
+    testCompile 'io.cucumber:cucumber-testng:3.0.2'
+
 }
 
 test {
     useTestNG() {
-        suites "src/test/resources/Smoke.xml"
+        suites "src/test/resources/Regression.xml"
+        systemProperty "browser", System.getProperty("browser")
     }
 }
 
