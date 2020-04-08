@@ -8,9 +8,9 @@ import org.openqa.selenium.WebDriver;
 public class SignUpStepDefinitions {
     WebDriver driver;
 
-    @Given("I open login page")
-    public void open_login_page() {
-        HomePage homePage = new HomePage(driver);
-        homePage.openPage();
-    }
+//    @Given("I open login page")
+//    public void open_login_page() {
+//        HomePage homePage = new HomePage(driver);
+//        homePage.openPage();
+//    }
 }

@@ -9,7 +9,10 @@ import org.testng.annotations.Test;
 
 
 @CucumberOptions(
-        features = {"src/test/resources/features"})
+        features = {"src/test/resources/features"},
+        plugin = { "pretty", "html:target/cucumber-reports" },
+        monochrome = true,
+         tags = {"@Smoke"}   )
 public class CucumberRunner {
     private TestNGCucumberRunner testNGCucumberRunner;
 

@@ -31,7 +31,7 @@ public class LoginStepDefinitions {
     }
 
     @Given("I open login page")
-    public void open_login_page() {
+    public void open_login_page() throws InterruptedException {
 //        driver.get("https://kwidos.tk/auth/login");
         LoginPage loginPage = new LoginPage(driver);
         loginPage.openPage();
@@ -40,7 +40,7 @@ public class LoginStepDefinitions {
     //I add "azat@testpro.io" email to the emial field
 
     @When("I add {string} email to the emial field")
-    public void open_add_email(String email) {
+    public void open_add_email(String email) throws InterruptedException {
 //        driver.findElement(By.cssSelector("#email")).sendKeys(email);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterEmail(email);
@@ -51,12 +51,12 @@ public class LoginStepDefinitions {
     public void open_add_password(String password) {
 //        driver.findElement(By.cssSelector("#password")).sendKeys(password);
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterEmail(password);
+        loginPage.enterPassword(password);
     }
 
 
 
-    @When("I clcik login button")
+    @When("I click login button")
     public void i_click_login_button() {
 //        driver.findElement(By.cssSelector("[type='submit']")).click();
         LoginPage loginPage = new LoginPage(driver);
@@ -67,7 +67,8 @@ public class LoginStepDefinitions {
 
     @When("I see login successfull message")
     public void i_see_login_success_message() throws InterruptedException {
-        Assert.assertTrue(1 == 1);
+        Thread.sleep(3000);
+        Assert.assertTrue(1 == 0);
 
     }
 

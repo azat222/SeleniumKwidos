@@ -31,6 +31,9 @@ test {
     useTestNG() {
         suites "src/test/resources/Regression.xml"
         systemProperty "browser", System.getProperty("browser")
+        outputDirectory = file("$project.buildDir//testngOutput")
+//        //required to turn on TestNG reports
+        useDefaultListeners = true
     }
 }
 
